@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+
+body {
+    background-color: #101010;
+    color: #efefef;
+    font-family: 'Fira Code', monospace;
+}
+
+header {
+    display: grid;
+    justify-items: center;
+    background-color: blueviolet;
+    height: 100px;
+}
+
+.wrapper {
+    max-width: 1200px;
+    width: 100%;
+    background-color: brown;
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-between; 
+    align-items: center;
+}
