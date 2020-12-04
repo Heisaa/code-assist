@@ -2,12 +2,25 @@
     background: var(--dark);
     align-content: start;
     align-self: start;
-    margin-top: 2em;
 }
 
 .calendar-wrapper h2 {
     color: var(--light);
     margin-left: 1em;
+}
+
+.time-chooser {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--light);
+    background: var(--dark2);
+}
+
+.time-chooser i {
+    margin: 0.5em 1em;
+    font-size: 1.5rem;
+    cursor: pointer;
 }
 
 #calendar {
@@ -17,6 +30,7 @@
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(5, 5em);
     gap: 1em;
+    user-select: none;
 }
 
 .columnHeader {
@@ -24,8 +38,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    background: var(--light2);
+    background: var(--light);
     border: solid 2px;
+}
+
+.today {
+    background: var(--dark);
+    color: var(--light);
+    border: thick double var(--light2);
 }
 
 .timeslot {
@@ -33,11 +53,107 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
     border: solid 2px;
     transition: 0.25s;
+    background: var(--light2);
 }
 
-.timeslot:hover {
+.bookable {
+    background: var(--light);
+}
+
+.bookable:hover {
     background: var(--blue);
     cursor: pointer;
+}
+
+#confirm-box {
+    display: none;
+    width: 20em;
+    height: 24em;
+    position: fixed;
+    top: calc(50% - 15em);
+    left: calc(50% - 10em);
+    border-radius: 5px;
+    background: var(--light);
+    padding: 2em;
+}
+
+#top-container {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-start;
+}
+
+#close {
+    position: absolute;
+    right: 32px;
+    top: 32px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.3;
+}
+
+#close:hover {
+    opacity: 1;
+}
+
+#close:before, #close:after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 33px;
+    width: 2px;
+    background-color: var(--dark);
+}
+
+#close:before {
+    transform: rotate(45deg);
+}
+
+#close:after {
+    transform: rotate(-45deg);
+}
+
+#main-container {
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%
+}
+
+#main-container h2 {
+    color: black;
+    margin: 0;
+    font-size: 2rem;
+    text-align: center;
+}
+
+#booking-form {
+    display: flex;
+    flex-direction: column;
+    height: 15em;
+}
+
+#booking-form label {
+    margin-bottom: 1em;
+}
+
+#booking-form button {
+    align-self: center;
+    margin-top: 5em;
+}
+
+/*
+ * Media Query
+ * Desktop over 1024
+ */
+
+@media (min-width: 1024px) {
+    .calendar-wrapper {
+        margin-top: 2em;
+    }
 }

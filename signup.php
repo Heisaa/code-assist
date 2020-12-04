@@ -10,13 +10,14 @@ include_once "header.php";
     <div class="wrapper">
         <div class="form-wrapper">
             <h2>Sign up to CodeHelper!</h2>
-            <form action="includes/signup.inc.php" method="post" class="signup-wrapper">
-                <input type="text" name="name" placeholder="Full name">
-                <input type="text" name="email" placeholder="Email">
-                <input type="text" name="uid" placeholder="Username">
-                <input type="password" name="pwd" placeholder="Password">
-                <input type="password" name="pwdrepeat" placeholder="Repeat password">
+            <form id="form" action="includes/signup.inc.php" method="post" class="signup-wrapper">
+                <input type="text" name="name" id="name" placeholder="Full name" required>
+                <input type="text" name="email" id="email" placeholder="Email" required>
+                <input type="text" name="uid" id="uid" placeholder="Username" required>
+                <input type="password" name="pwd" id="pwd" placeholder="Password" required>
+                <input type="password" name="pwdrepeat" id="pwdrepeat" placeholder="Repeat password" required>
                 <button type="submit" name="submit">Sign up</button>
+                <div id="errormessage"></div>
             </form>
             <?php
             if (isset($_GET["error"])) {
@@ -49,6 +50,7 @@ include_once "footer.php";
 </div>
 <!-- Scripts -->
 <script src="js/notransitions.js"></script>
+<script src="js/validation.js"></script>
 </body>
 
 </html>
