@@ -73,8 +73,8 @@
     width: 20em;
     height: 24em;
     position: fixed;
-    top: calc(50% - 15em);
-    left: calc(50% - 10em);
+    top: calc(50% - 14em);
+    left: calc(50% - 12em);
     border-radius: 5px;
     background: var(--light);
     padding: 2em;
