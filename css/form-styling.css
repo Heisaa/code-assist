@@ -45,7 +45,7 @@ button:hover, button:focus {
 }
 
 #errormessage {
-    background: rgb(243, 121, 121);
+    background: white;
     padding: 0 1em 1em 1em;
 }
 
