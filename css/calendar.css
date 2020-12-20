@@ -68,6 +68,14 @@
     cursor: pointer;
 }
 
+.booked {
+    background: #e65959;
+}
+
+.userbooked {
+    background: var(--blue);
+}
+
 #confirm-box {
     display: none;
     width: 20em;

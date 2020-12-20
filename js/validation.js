@@ -29,7 +29,7 @@ form.addEventListener("submit", (event) => {
     const userNamePattern = /^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/;
     // Name and emailcombined
     if (nameEmail != null) {
-        if (!userNamePattern.test(nameEmail.value) || !emailPattern.test(nameEmail.value)) {
+        if (!userNamePattern.test(nameEmail.value) && !emailPattern.test(nameEmail.value)) {
             messages.push("<p>Username can only consist of letters, numbers, hyphens and dashes, emails must be valid</p>");
         }
     }
@@ -60,7 +60,7 @@ form.addEventListener("submit", (event) => {
     //Print messages and stop submit
     if (messages.length > 0) {
         event.preventDefault();
-        errorMessage.insertAdjacentHTML("beforeend", `${messages.join("")}`);
+        errorMessage.innerHTML = messages.join("");
     }
     
   });

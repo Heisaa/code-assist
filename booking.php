@@ -14,6 +14,11 @@ include_once "header.php";
             <div id="time"></div>
             <i class="fas fa-arrow-alt-circle-right" onclick="right()"></i>
         </div>
+        <?php
+            include_once "includes/getBookings.inc.php";
+            echo "<script>var bookedDates = " . json_encode($bookings) . "</script>";
+            echo "<script>var userId = " . $_SESSION["userid"] . "</script>";
+        ?>
         <div id="calendar">
         </div>
         <div id="confirm-box">
@@ -22,15 +27,20 @@ include_once "header.php";
             </div>
             <div id="main-container">
                 <h2 id="confirm-time"></h2>
-                <form action="" method="post" id="booking-form">
-                    <label for="subject-selection">Choose a subject</label>
-                    <select name="subject" id="subject-selection">
-                        <option value="basic">Basic programming</option>
-                        <option value="web">Web development</option>
-                        <option value="OOP">Object oriented programming</option>
+                <form action="includes/booking.inc.php" method="post" id="booking-form">
+                    <input type="hidden" name="time-slot" id="time-slot" value="">
+                    <?php 
+                        echo "<input type='hidden' name='user' id='user' value='" . $_SESSION["userid"] . "'>"
+                    ?>
+                    
+                    <label for="subject">Choose a subject</label>
+                    <select name="subject" id="subject">
+                        <option value="Basic programming">Basic programming</option>
+                        <option value="Web development">Web development</option>
+                        <option value="Object oriented programming">Object oriented programming</option>
                     </select>
 
-                    <button type="submit">Book</button>
+                    <button type="submit" name="submit">Book</button>
                 </form>
             </div>
         </div>

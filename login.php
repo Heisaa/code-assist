@@ -36,7 +36,7 @@ include_once "footer.php";
 </div>
 <!-- Scripts -->
 <script src="js/notransitions.js"></script>
-<!-- <script src="js/validation.js"></script> -->
+<script src="js/validation.js"></script>
 </body>
 
 </html>

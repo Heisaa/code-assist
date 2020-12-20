@@ -4,7 +4,7 @@ const confirmBox = document.getElementById("confirm-box");
 const closeX = document.getElementById("close");
 const confirmTime = document.getElementById("confirm-time");
 const bookingForm = document.getElementById("booking-form");
-const subjectSelection = document.getElementById("subject-selection");
+const subject = document.getElementById("subject");
 
 const dates = [];
 const currentDate = new Date();
@@ -23,6 +23,7 @@ for (let i = 0; i < 730; i++) {
 }
 
 const currentWeekDay = dates[aYear].getDay();
+
 let indexOfWeekStart = aYear - currentWeekDay + 1; // + 1 because weeks start on mondays
 const weekStart = dates[indexOfWeekStart];
 
@@ -35,6 +36,11 @@ const displayCalendar = (startDateIndex) => {
     // Remove previous page
     time.innerHTML = "";
     calendar.innerHTML = "";
+
+    // Fix Sunday belongs to next week
+    if (dates[aYear].getDay() == 0) {
+        startDateIndex -= 7;
+    }
 
     // Set time period
     time.insertAdjacentHTML("beforeend", `${fullFormatter.format(dates[startDateIndex])} - ${fullFormatter.format(dates[startDateIndex + 6])}`);
@@ -73,20 +79,37 @@ const displayCalendar = (startDateIndex) => {
         for (let i = startDateIndex; i < (startDateIndex + 7); i++) {
 
             timeslotStartHour = timeslot.slice(0, 2);
-            // Decide whitch are bookable
+            let dateId = `${fullFormatter.format(dates[i])} ${timeslot}`;
+            let classList = "timeslot";
+
+            // Check which dates that are booked
+            bookedDates.forEach(booking => {
+                if (booking["bookingsTime"] == dateId && booking["userId"] == userId) {
+                    classList += " userbooked";
+                } else if (booking["bookingsTime"] == dateId) {
+                    classList += " booked";
+                }
+            });
+            // Decide whitch are bookable and print timeslots
             if (i > aYear) {
+                if (classList == "timeslot") {
+                    classList += " bookable";
+                }
                 calendar.insertAdjacentHTML("beforeend",
-                    `<div class="timeslot bookable" id="${fullFormatter.format(dates[i])} ${timeslot}">
+                    `<div class="${classList}" id="${dateId}">
                         ${timeslot}
                     </div>`);
             } else if (i == aYear && timeslotStartHour > currentDate.getHours()) {
+                if (classList == "timeslot") {
+                    classList += " bookable";
+                }
                 calendar.insertAdjacentHTML("beforeend",
-                    `<div class="timeslot bookable" id="${fullFormatter.format(dates[i])} ${timeslot}">
+                    `<div class="${classList}" id="${dateId}">
                         ${timeslot}
                 </div>`);
             } else {
                 calendar.insertAdjacentHTML("beforeend",
-                    `<div class="timeslot" id="${fullFormatter.format(dates[i])} ${timeslot}">
+                    `<div class="${classList}" id="${dateId}">
                         ${timeslot}
                     </div>`);
             }
@@ -118,6 +141,7 @@ const right = () => {
 calendar.addEventListener("click", (event) => {
     if (event.target.className == "timeslot bookable") {
         confirmBox.style.display = "block";
+        document.getElementById("time-slot").value = event.target.id;
         let timeText = event.target.id.split(" ");
         confirmTime.innerHTML = timeText[0] + "<br>" + timeText[1] + timeText[2] + timeText[3];
     }
@@ -129,7 +153,7 @@ closeX.addEventListener("click", () => {
 
 // Submit event listener
 bookingForm.addEventListener("submit", (event) => {
-    if (subjectSelection == null) {
+    if (subject == null) {
         event.preventDefault();
     }
 });
