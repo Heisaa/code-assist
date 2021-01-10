@@ -14,10 +14,28 @@ include_once "header.php";
             <div id="time"></div>
             <i class="fas fa-arrow-alt-circle-right" onclick="right()"></i>
         </div>
+        <div class="legend">
+            <div class="legend-container">
+                <p>Bookable dates:</p>
+                <div class="square" id="legend-bookable"></div>
+            </div>
+            <div class="legend-container">
+                <p>Booked dates: </p>
+                <div class="square" id="legend-booked"></div>
+            </div>
+            <div class="legend-container">
+                <p>Past dates: </p>
+                <div class="square" id="past"></div>
+            </div>
+            <div class="legend-container">
+                <p>Booked by others: </p>
+                <div class="square" id="others"></div>
+            </div>
+        </div>
         <?php
-            include_once "includes/getBookings.inc.php";
-            echo "<script>var bookedDates = " . json_encode($bookings) . "</script>";
-            echo "<script>var userId = " . $_SESSION["userid"] . "</script>";
+        include_once "includes/getBookings.inc.php";
+        echo "<script>var bookedDates = " . json_encode($bookings) . "</script>";
+        echo "<script>var userId = " . $_SESSION["userid"] . "</script>";
         ?>
         <div id="calendar">
         </div>
@@ -29,10 +47,10 @@ include_once "header.php";
                 <h2 id="confirm-time"></h2>
                 <form action="includes/booking.inc.php" method="post" id="booking-form">
                     <input type="hidden" name="time-slot" id="time-slot" value="">
-                    <?php 
-                        echo "<input type='hidden' name='user' id='user' value='" . $_SESSION["userid"] . "'>"
+                    <?php
+                    echo "<input type='hidden' name='user' id='user' value='" . $_SESSION["userid"] . "'>"
                     ?>
-                    
+
                     <label for="subject">Choose a subject</label>
                     <select name="subject" id="subject">
                         <option value="Basic programming">Basic programming</option>
@@ -44,6 +62,12 @@ include_once "header.php";
                 </form>
             </div>
         </div>
+        <?php
+        if (isset($_GET["error"]) && $_GET["error"] == "none") {
+            echo "<div class='booking-confirmed'><div class='green'><p>Booking confirmed, check your email for details</p></div></div>";
+        }
+        ?>
+
     </div>
 </main>
 

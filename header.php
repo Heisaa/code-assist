@@ -27,9 +27,9 @@
                     <ul>
                         <li><a href="index.php">Home</a></li>
                         <li><a href="about.php">About</a></li>
-                        <li><a href="booking.php">Booking</a></li>
                         <?php
                             if (isset($_SESSION["useruid"])) {
+                                echo "<li><a href='booking.php'>Booking</a></li>";
                                 echo "<li><a href='booking.php'>Logged in as " . $_SESSION["useruid"] . "</a></li>";
                                 echo "<li><a href='includes/logout.inc.php'>Log Out</a></li>";
                             } else {

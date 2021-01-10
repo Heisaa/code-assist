@@ -2,43 +2,19 @@
 
 // Ta bort if statments och returnera direkt
 function emptyInputSignup($name, $email, $username, $pwd, $pwdRepeat) {
-    $result;
-    if (empty($name) || empty($email) || empty($username) || empty($pwd) || empty($pwdRepeat)) {
-        $result = true;
-    } else {
-        $result = false;
-    }
-    return $result;
+    return (empty($name) || empty($email) || empty($username) || empty($pwd) || empty($pwdRepeat));
 }
 
 function invalidUid($username) {
-    $result;
-    if (!preg_match("/^[a-zA-Z0-9]*$/", $username)) {
-        $result = true;
-    } else {
-        $result = false;
-    }
-    return $result;
+    return (!preg_match("/^[a-zA-Z0-9]*$/", $username));
 }
 
 function invalidEmail($email) {
-    $result;
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $result = true;
-    } else {
-        $result = false;
-    }
-    return $result;
+    return (!filter_var($email, FILTER_VALIDATE_EMAIL));
 }
 
 function pwdMatch($pwd, $pwdRepeat) {
-    $result;
-    if ($pwd !== $pwdRepeat) {
-        $result = true;
-    } else {
-        $result = false;
-    }
-    return $result;
+    return ($pwd !== $pwdRepeat);
 }
 
 function uidExists($conn, $username, $email) {
@@ -58,8 +34,7 @@ function uidExists($conn, $username, $email) {
     if ($row = mysqli_fetch_assoc($resultData)) {
         return $row;
     } else {
-        $result = false;
-        return $result;
+        return false;
     }
 
     mysqli_stmt_close($stmt);
@@ -88,13 +63,7 @@ function createUser($conn, $name, $email, $username, $pwd) {
 // Login
 
 function emptyInputLogin($username, $pwd) {
-    $result;
-    if (empty($username) || empty($pwd)) {
-        $result = true;
-    } else {
-        $result = false;
-    }
-    return $result;
+    return (empty($username) || empty($pwd));
 }
 
 function loginUser($conn, $username, $pwd) {
